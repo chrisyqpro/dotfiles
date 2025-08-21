@@ -1,0 +1,73 @@
+[general]
+live_config_reload = true
+
+[env]
+COLORTERM = "truecolor"
+LANG = "en_US.UTF-8"
+LC_ALL = "en_US.UTF-8"
+TERM = "alacritty"
+
+[[colors.indexed_colors]]
+color = "#ffa066"
+index = 16
+
+[[colors.indexed_colors]]
+color = "#ff5d62"
+index = 17
+
+[colors.bright]
+black = "#727169"
+blue = "#7fb4ca"
+cyan = "#7aa89f"
+green = "#98bb6c"
+magenta = "#938aa9"
+red = "#e82424"
+white = "#dcd7ba"
+yellow = "#e6c384"
+
+[colors.normal]
+black = "#090618"
+blue = "#7e9cd8"
+cyan = "#6a9589"
+green = "#76946a"
+magenta = "#957fb8"
+red = "#c34043"
+white = "#c8c093"
+yellow = "#c0a36e"
+
+[colors.primary]
+background = "#1f1f28"
+foreground = "#dcd7ba"
+
+[colors.selection]
+background = "#2d4f67"
+foreground = "#c8c093"
+
+[font]
+size = 16.0
+
+[font.bold]
+family = "BlexMono Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "BlexMono Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "BlexMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "BlexMono Nerd Font"
+style = "Regular"
+
+[mouse]
+hide_when_typing = true
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Middle"
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
