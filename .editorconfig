@@ -1,0 +1,16 @@
+[*]
+indent_size = 4
+indent_style = space
+max_line_length = 80
+tab_width = 8
+
+[*.sh]
+indent_size = 2
+# --language-variant
+shell_variant      = bash
+binary_next_line   = true
+# --case-indent
+switch_case_indent = true
+
+[*.md]
+indent_size = 2
