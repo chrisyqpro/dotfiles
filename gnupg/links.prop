@@ -1,0 +1,2 @@
+$DOTFILES/gnupg/gpg.conf=$HOME/.local/share/gnupg/gpg.conf
+$DOTFILES/gnupg/gpg-agent.conf=$HOME/.local/share/gnupg/gpg-agent.conf
