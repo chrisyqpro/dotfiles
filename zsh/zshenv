@@ -12,7 +12,3 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 export ARCHFLAGS="-arch arm64"
-
-if [[ -d "$CARGO_HOME" ]]; then
-  . "$CARGO_HOME/env"
-fi

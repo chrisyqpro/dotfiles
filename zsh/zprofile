@@ -12,6 +12,7 @@ fpath=("$HOME/.local/share/zsh/site-functions" $fpath)
 typeset -U PATH path
 typeset app_paths=()
 
+if [ -d "$XDG_DATA_HOME/bob" ]; then app_paths+="$XDG_DATA_HOME/bob/nvim-bin"; fi
 if [ -d "$CARGO_HOME" ]; then app_paths+="$CARGO_HOME/bin"; fi
 if [ -d "$PNPM_HOME" ]; then app_paths+="$PNPM_HOME"; fi
 if [ -d "$GOPATH" ]; then app_paths+="$GOPATH/bin"; fi
