@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-echo "Script started with args: $*" >> ~/tmp/tmux-debug.log
-echo "DOTFILES: $DOTFILES" >> ~/tmp/tmux-debug.log
-echo "PWD: $PWD" >> ~/tmp/tmux-debug.log
-
 DIRS=(
     "$HOME/doc"
     "$HOME/repo"
