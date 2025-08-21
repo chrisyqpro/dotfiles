@@ -1,0 +1,24 @@
+[user]
+	name = Chris Qi
+	email = chrisyqpro@gmail.com
+	signingkey = 0x2C3658F92F7A060E
+[core]
+	editor = nvim
+	autocrlf = input
+[diff]
+	tool = nvim-diff
+[difftool "nvim-diff"]
+	cmd = nvim -d $LOCAL $REMOTE
+[merge]
+	tool = nvim-merge
+	conflictstyle = diff3
+[mergetool]
+	keepBackup = false
+[mergetool "nvim-merge"]
+	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
