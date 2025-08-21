@@ -1,0 +1,5 @@
+$DOTFILES/zsh/env.zsh=$HOME/.zshenv
+$DOTFILES/zsh/zshenv=$HOME/.config/zsh/.zshenv
+$DOTFILES/zsh/zshrc=$HOME/.config/zsh/.zshrc
+$DOTFILES/zsh/zprofile=$HOME/.config/zsh/.zprofile
+$DOTFILES/zsh/site-functions=$HOME/.local/share/zsh/site-functions

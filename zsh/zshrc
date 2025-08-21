@@ -1,0 +1,57 @@
+# TODO: implement missing feature from omz/use zap for this part
+#
+# plugins=(git gitignore man macos sudo rust volta)
+# source_if_exists $DOTFILES/zsh/git.zsh  TODO: try the git output format
+
+# completions
+autoload -Uz compinit
+zstyle ':completion:*' menu yes select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+zmodload zsh/complist
+_comp_options+=(globdots)      # Include hidden files.
+zle_highlight=('paste:none')
+for dump in "${ZDOTDIR:-$HOME}/.zcompdump"(N.mh+24); do
+  compinit
+done
+compinit -C
+
+# prompt
+autoload -U colors && colors
+PS1="[%B%{$fg[cyan]%}%n%f@%{$fg[blue]%}%M%b %{$fg[magenta]%}%~%f]%B%(?.%F{green}.%F{red})%#%b%f "
+
+# options
+unsetopt BEEP
+setopt AUTO_CD
+setopt GLOB_DOTS
+setopt NOMATCH
+setopt MENU_COMPLETE
+setopt EXTENDED_GLOB
+setopt INTERACTIVE_COMMENTS
+setopt APPEND_HISTORY
+
+# plugin and keybind
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M menuselect '?' history-incremental-search-forward
+bindkey -M menuselect '/' history-incremental-search-backward
+# edit command line
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
+# vi key in completion
+if [[ -o menucomplete ]]; then 
+  # Use vim keys in tab complete menu:
+  bindkey -M menuselect '^h' vi-backward-char
+  bindkey -M menuselect '^k' vi-up-line-or-history
+  bindkey -M menuselect '^l' vi-forward-char
+  bindkey -M menuselect '^j' vi-down-line-or-history
+  bindkey -M menuselect '^[[Z' vi-up-line-or-history
+fi
+
+source $DOTFILES/zsh/export.zsh
+source $DOTFILES/zsh/alias.zsh
+
+source <(fzf --zsh)

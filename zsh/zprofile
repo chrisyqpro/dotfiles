@@ -1,0 +1,25 @@
+if [ "$(arch)" = "arm64" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+if type brew &>/dev/null; then
+  fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
+fi
+fpath=("$HOME/.local/share/zsh/site-functions" $fpath)
+
+typeset -U PATH path
+typeset app_paths=()
+
+if [ -d "$CARGO_HOME" ]; then app_paths+="$CARGO_HOME/bin"; fi
+if [ -d "$PNPM_HOME" ]; then app_paths+="$PNPM_HOME"; fi
+if [ -d "$GOPATH" ]; then app_paths+="$GOPATH/bin"; fi
+if [ -d "/usr/local/go" ]; then app_paths+="/usr/local/go/bin"; fi
+if [ -d "$HOME/.local/bin" ] ; then app_paths+="$HOME/.local/bin"; fi
+if [ -d "$HOME/bin" ] ; then app_paths+="$HOME/bin"; fi
+
+path=($app_paths $path)
+
+# Added by Toolbox App
+export PATH="$PATH:/Users/dzr/Library/Application Support/JetBrains/Toolbox/scripts"
