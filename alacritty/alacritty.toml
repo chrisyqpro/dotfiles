@@ -7,41 +7,72 @@ LANG = "en_US.UTF-8"
 LC_ALL = "en_US.UTF-8"
 TERM = "alacritty"
 
-[[colors.indexed_colors]]
-color = "#ffa066"
-index = 16
-
-[[colors.indexed_colors]]
-color = "#ff5d62"
-index = 17
-
-[colors.bright]
-black = "#727169"
-blue = "#7fb4ca"
-cyan = "#7aa89f"
-green = "#98bb6c"
-magenta = "#938aa9"
-red = "#e82424"
-white = "#dcd7ba"
-yellow = "#e6c384"
-
-[colors.normal]
-black = "#090618"
-blue = "#7e9cd8"
-cyan = "#6a9589"
-green = "#76946a"
-magenta = "#957fb8"
-red = "#c34043"
-white = "#c8c093"
-yellow = "#c0a36e"
+# Vague for Alacritty
+# -------------------
+# Theme Author: vague2k <ilovedrawing056@gmail.com>
+# Ported by:    skewb1k <skewb1kunix@gmail.com>
+# License:      MIT License
+# Upstream:     https://github.com/vague2k/vague.nvim/blob/main/extras/alacritty/vague.toml
 
 [colors.primary]
-background = "#1f1f28"
-foreground = "#dcd7ba"
+background = '#141415'
+foreground = '#cdcdcd'
 
-[colors.selection]
-background = "#2d4f67"
-foreground = "#c8c093"
+[colors.normal]
+black = '#252530'
+red = '#d8647e'
+green = '#7fa563'
+yellow = '#f3be7c'
+blue = '#6e94b2'
+magenta = '#bb9dbd'
+cyan = '#aeaed1'
+white = '#cdcdcd'
+
+[colors.bright]
+black = '#606079'
+red = '#e08398'
+green = '#99b782'
+yellow = '#f5cb96'
+blue = '#8ba9c1'
+magenta = '#c9b1ca'
+cyan = '#bebeda'
+white = '#d7d7d7'
+
+# [[colors.indexed_colors]]
+# color = "#ffa066"
+# index = 16
+#
+# [[colors.indexed_colors]]
+# color = "#ff5d62"
+# index = 17
+#
+# [colors.bright]
+# black = "#727169"
+# blue = "#7fb4ca"
+# cyan = "#7aa89f"
+# green = "#98bb6c"
+# magenta = "#938aa9"
+# red = "#e82424"
+# white = "#dcd7ba"
+# yellow = "#e6c384"
+#
+# [colors.normal]
+# black = "#090618"
+# blue = "#7e9cd8"
+# cyan = "#6a9589"
+# green = "#76946a"
+# magenta = "#957fb8"
+# red = "#c34043"
+# white = "#c8c093"
+# yellow = "#c0a36e"
+#
+# [colors.primary]
+# background = "#1f1f28"
+# foreground = "#dcd7ba"
+#
+# [colors.selection]
+# background = "#2d4f67"
+# foreground = "#c8c093"
 
 [font]
 size = 16.0
