@@ -18,3 +18,6 @@ alias ll="ls -lh"
 alias la="ll -a"
 alias tree="tree -L 2"
 alias as-tree="\\tree --fromfile"
+
+alias ptyp="TYPST_ROOT=$(pwd) nvim"
+alias avim="AUTO_BLINK=1 nvim"
