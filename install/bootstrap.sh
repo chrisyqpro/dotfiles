@@ -60,7 +60,7 @@ link_file() {
         [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
         read -r -n 1 action </dev/tty
 
-      case "$action" in
+        case "$action" in
           o)
             overwrite=true
             ;;

@@ -1,2 +1,2 @@
-$DOTFILES/scripts/b=$HOME/bin/b
-$DOTFILES/scripts/uve=$HOME/bin/uve
+$DOTFILES/scripts/b.sh=$HOME/bin/b
+$DOTFILES/scripts/uve.sh=$HOME/bin/uve

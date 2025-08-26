@@ -48,8 +48,8 @@ for uid in d y; do
   # FIX: detect correct sec record by using the current secret key file ($SEC_FILE)
   # Instead of extracting from a sec record (which may yield a keygrip), extract the fingerprint
   # from the first fpr record. Field 10 of an "fpr" record is the full fingerprint.
-  KEYID=$(gpg --with-colons --import-options show-only --import "$SEC_FILE" 2>/dev/null |
-    awk -F: '$1=="fpr" {print $10; exit}')
+  KEYID=$(gpg --with-colons --import-options show-only --import "$SEC_FILE" 2>/dev/null \
+    | awk -F: '$1=="fpr" {print $10; exit}')
   if [ -z "$KEYID" ]; then
     read -r -p "Could not auto-detect primary key ID. Please enter your primary key ID (fingerprint): " KEYID
   fi
@@ -60,8 +60,8 @@ for uid in d y; do
 
   # Instead of extracting field 5 from "ssb" lines,
   # extract the full fingerprint for each subkey by reading the following "fpr" line.
-  SUBKEYS=$(gpg --with-colons --list-secret-keys "$KEYID" |
-    awk -F: '$1=="ssb" { getline; if($1=="fpr") print $10 }')
+  SUBKEYS=$(gpg --with-colons --list-secret-keys "$KEYID" \
+    | awk -F: '$1=="ssb" { getline; if($1=="fpr") print $10 }')
 
   if [ -z "$SUBKEYS" ]; then
     echo "No secret subkeys found for key $KEYID. Exiting."

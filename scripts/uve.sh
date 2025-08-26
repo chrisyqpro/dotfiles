@@ -10,7 +10,7 @@ if [[ $# -lt 1 ]]; then
 fi
 
 script=$1
-shift                         # forward any extra args to nvim
+shift # forward any extra args to nvim
 script_abs=$(realpath "$script")
 script_dir=$(dirname "$script_abs")
 
@@ -19,7 +19,7 @@ if [[ ! -f "$script_abs" ]]; then
   exit 1
 fi
 
-activate_and_echo () {
+activate_and_echo() {
   local activate=$1
   # shellcheck disable=SC1090
   source "$activate"

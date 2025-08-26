@@ -16,12 +16,12 @@ gum spin --show-output --spinner minidot --title "Updating brew..." -- brew upda
 printf "\n"
 
 OUTDATED=$(gum spin --show-output --spinner minidot \
-    --title "Checking for outdated brew packages" -- brew outdated)
+  --title "Checking for outdated brew packages" -- brew outdated)
 
 if [[ -n "$OUTDATED" ]]; then
   echo "$OUTDATED"
   gum confirm --selected.background=2 --selected.foreground=0 \
-      "Upgrade the outdated formulae above?" && brew upgrade
+    "Upgrade the outdated formulae above?" && brew upgrade
   printf "\n"
   brew cleanup --prune=all
   printf "\n"
@@ -31,4 +31,4 @@ else
 fi
 
 gum spin --show-output --spinner minidot --title "Checking for brew issues..." \
-    -- brew doctor
+  -- brew doctor
