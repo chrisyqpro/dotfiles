@@ -619,6 +619,60 @@ end, { desc = "Debug: Set Breakpoint" })
 map("n", "<F7>", function()
     require("dapui").toggle()
 end, { desc = "Debug: See last session result." })
+-- Javascript
+dap.adapters["pwa-node"] = {
+    type = "server",
+    host = "localhost",
+    port = "${port}",
+    executable = {
+        command = "node",
+        args = { vim.fn.expand("~") .. "/bin/js-debug/src/dapDebugServer.js", "${port}" },
+    },
+}
+dap.configurations.javascript = {
+    {
+        type = "pwa-node",
+        request = "launch",
+        name = "Launch JavaScript file",
+        program = "${file}",
+        cwd = "${workspaceFolder}",
+        console = "integratedTerminal",
+    },
+}
+dap.configurations.javascript = {
+    {
+        type = "pwa-node",
+        request = "launch",
+        name = "Launch JavaScript file (Deno)",
+        runtimeExecutable = "deno",
+        runtimeArgs = {
+            "run",
+            "--inspect-wait",
+            "--allow-all",
+        },
+        program = "${file}",
+        cwd = "${workspaceFolder}",
+        attachSimplePort = 9229,
+        console = "integratedTerminal",
+    },
+}
+dap.configurations.typescript = {
+    {
+        type = "pwa-node",
+        request = "launch",
+        name = "Launch TypeScript file (Deno)",
+        runtimeExecutable = "deno",
+        runtimeArgs = {
+            "run",
+            "--inspect-wait",
+            "--allow-all",
+        },
+        program = "${file}",
+        cwd = "${workspaceFolder}",
+        attachSimplePort = 9229,
+        console = "integratedTerminal",
+    },
+}
 
 -- Install golang specific config
 -- require('dap-go').setup {
