@@ -1,5 +1,3 @@
-vim.api.nvim_set_hl(0, "@lsp.type.comment", {})
-
 vim.wo.linebreak = true
 vim.wo.spell = true
 
