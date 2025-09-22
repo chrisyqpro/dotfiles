@@ -7,8 +7,17 @@ export GOPATH="$XDG_DATA_HOME/go"
 export PNPM_HOME="$XDG_DATA_HOME/pnpm"
 export CODEX_HOME="$XDG_DATA_HOME/codex"
 
-export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_NO_AUTO_UPDATE=1
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-export ARCHFLAGS="-arch arm64"
+case "$OSTYPE" in
+  darwin*)  # macOS only
+    export HOMEBREW_NO_ANALYTICS=1
+    export HOMEBREW_NO_AUTO_UPDATE=1
+    if [[ "$(uname -m)" = "arm64" ]]; then
+      export ARCHFLAGS="-arch arm64"
+    fi
+    export SHELL_SESSIONS_DISABLE=1
+    ;;
+  *)
+    ;;
+esac

@@ -1,9 +1,10 @@
 export EDITOR="nvim"
-export TERMINAL="alacritty"
+export COLORTERM="truecolor"
 export MANPAGER='nvim +Man!'
 export MANWIDTH=80
-HISTSIZE=50000
-SAVEHIST=100000
+HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+HISTSIZE=1000000000
+SAVEHIST=1000000000
 
 # Tell SSH to use gpg agent
 export GPG_TTY=$(tty)

@@ -20,6 +20,8 @@ autoload -U colors && colors
 PS1="[%B%{$fg[cyan]%}%n%f@%{$fg[blue]%}%M%b %{$fg[magenta]%}%~%f]%B%(?.%F{green}.%F{red})%#%b%f "
 
 # options
+source $DOTFILES/zsh/export.zsh
+
 unsetopt BEEP
 setopt AUTO_CD
 setopt GLOB_DOTS
@@ -28,30 +30,71 @@ setopt MENU_COMPLETE
 setopt EXTENDED_GLOB
 setopt INTERACTIVE_COMMENTS
 setopt APPEND_HISTORY
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
-# plugin and keybind
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey -M menuselect '?' history-incremental-search-forward
-bindkey -M menuselect '/' history-incremental-search-backward
-# edit command line
-autoload edit-command-line
-zle -N edit-command-line
-bindkey '^Xe' edit-command-line
-# vi key in completion
-if [[ -o menucomplete ]]; then 
-  # Use vim keys in tab complete menu:
+# vi keybind
+bindkey -v
+export KEYTIMEOUT=25
+
+if [[ -o menucomplete ]]; then
   bindkey -M menuselect '^h' vi-backward-char
   bindkey -M menuselect '^k' vi-up-line-or-history
   bindkey -M menuselect '^l' vi-forward-char
   bindkey -M menuselect '^j' vi-down-line-or-history
   bindkey -M menuselect '^[[Z' vi-up-line-or-history
 fi
+bindkey -M menuselect '?' history-incremental-search-forward
+bindkey -M menuselect '/' history-incremental-search-backward
 
-source $DOTFILES/zsh/export.zsh
+# Change cursor shape for different vi modes.
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[1 q';;      # block
+        viins|main) echo -ne '\e[5 q';; # beam
+    esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+# edit command line
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd 'vv' edit-command-line
+bindkey -M viins '^A' beginning-of-line
+bindkey -M viins '^E' end-of-line
+bindkey -v '^?' backward-delete-char
+
+# plugin and keybind
+case "$OSTYPE" in
+  darwin*)
+    source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+    ;;
+  *)
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source ${XDG_DATA_HOME}/zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+    ;;
+esac
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+
 source $DOTFILES/zsh/alias.zsh
 
 source <(fzf --zsh)

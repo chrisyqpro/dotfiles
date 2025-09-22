@@ -13,11 +13,19 @@ alias cgn="cargo +nightly"
 alias cgl="CARGO_PROFILE_DEV_CODEGEN_BACKEND=cranelift cargo +nightly -Zcodegen-backend"
 alias gorom="~/game/retro/gorom/bin/gorom"
 
-alias ls="gls -F --color=auto --group-directories-first"
+case "$OSTYPE" in
+  darwin*)  # macOS only
+    alias ls="gls"
+    ;;
+  *)
+    ;;
+esac
+
+alias ls="ls -F --color=auto --group-directories-first"
 alias ll="ls -lh"
 alias la="ll -a"
 alias tree="tree -L 2"
 alias as-tree="\\tree --fromfile"
 
-alias ptyp="TYPST_ROOT=$(pwd) nvim"
 alias avim="AUTO_BLINK=1 nvim"
+alias ptyp="TYPST_ROOT=$(pwd) avim"
