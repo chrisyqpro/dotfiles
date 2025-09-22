@@ -17,6 +17,7 @@ return {
     root_markers = { ".git" },
     settings = {
         formatterMode = "typstyle",
+        outputPath = "$root/output/$name"
     },
     on_attach = function(client, bufnr)
         for _, command in ipairs({
@@ -30,7 +31,8 @@ return {
             -- 'tinymist.exportAnsiHighlight',
         }) do
             local cmd_func, cmd_name, cmd_desc = create_tinymist_command(command, client, bufnr)
-            vim.api.nvim_buf_create_user_command(bufnr, cmd_name, cmd_func, { nargs = 0, desc = cmd_desc })
+            vim.api.nvim_buf_create_user_command(bufnr, cmd_name, cmd_func,
+                { nargs = 0, desc = cmd_desc })
         end
     end,
 }

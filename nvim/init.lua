@@ -43,21 +43,21 @@ local map = vim.keymap.set
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 map("n", "<Esc>", "<cmd>nohlsearch<CR>")
-map("v", "J", ":m '>+1<CR>gv=gv") -- Move line down
-map("v", "K", ":m '<-2<CR>gv=gv") -- Move line up
-map("n", "J", "mzJ`z") -- Keep cursor in the same place after J
-map("n", "<C-d>", "<C-d>zz") -- Center cursorline after page-down
-map("n", "<C-u>", "<C-u>zz") -- Center cursorline after page-up
-map("n", "n", "nzzzv") -- Center cursorline and open enough folds on search result
-map("n", "N", "Nzzzv") -- Center cursorline and open enough folds on search result
-map("n", "=ap", "ma=ap'a") -- Return cursor to 0 when indent a paragraph
+map("v", "J", ":m '>+1<CR>gv=gv")       -- Move line down
+map("v", "K", ":m '<-2<CR>gv=gv")       -- Move line up
+map("n", "J", "mzJ`z")                  -- Keep cursor in the same place after J
+map("n", "<C-d>", "<C-d>zz")            -- Center cursorline after page-down
+map("n", "<C-u>", "<C-u>zz")            -- Center cursorline after page-up
+map("n", "n", "nzzzv")                  -- Center cursorline and open enough folds on search result
+map("n", "N", "Nzzzv")                  -- Center cursorline and open enough folds on search result
+map("n", "=ap", "ma=ap'a")              -- Return cursor to 0 when indent a paragraph
 map({ "n", "v" }, "<leader>y", [["+y]]) -- Yank into system clipboard
 map("n", "<leader>Y", [["+Y]])
 map({ "n", "v" }, "<leader>x", [["+d]]) -- Kill into system clipboard
 map("n", "<leader>X", [["+X]])
-map("x", "<leader>p", [["_dP]]) -- Paste w/o overwrite default register
+map("x", "<leader>p", [["_dP]])         -- Paste w/o overwrite default register
 map({ "n", "v" }, "<leader>d", [["_d]]) -- Kill w/o overwrite default register
-map("n", "<leader>E", vim.cmd.Ex) -- Open netrw file manager
+map("n", "<leader>E", vim.cmd.Ex)       -- Open netrw file manager
 map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Plugins
@@ -66,7 +66,7 @@ vim.pack.add({
     "https://github.com/stevearc/oil.nvim",
     "https://github.com/lewis6991/gitsigns.nvim",
     "https://github.com/echasnovski/mini.nvim",
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter",             version = "main" },
     "https://github.com/nvim-treesitter/nvim-treesitter-context",
     { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
     "https://github.com/windwp/nvim-autopairs",
@@ -80,7 +80,7 @@ vim.pack.add({
     "https://github.com/nvim-neotest/nvim-nio",
     "https://github.com/mfussenegger/nvim-dap",
     "https://codeberg.org/mfussenegger/nvim-dap-python",
-    "https://github.com/toppair/peek.nvim",
+    "https://github.com/iamcco/markdown-preview.nvim",
     { src = "https://github.com/chomosuke/typst-preview.nvim", verion = vim.version.range("1.*") },
     "https://github.com/Vigemus/iron.nvim",
 })
@@ -146,7 +146,8 @@ require("gitsigns").setup({
             gitsigns.diffthis("@")
         end, { desc = "git [D]iff against last commit" })
         -- Toggles
-        map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "[T]oggle git show [b]lame line" })
+        map("n", "<leader>tb", gitsigns.toggle_current_line_blame,
+            { desc = "[T]oggle git show [b]lame line" })
         -- Text object
         map({ "o", "x" }, "ih", gitsigns.select_hunk)
     end,
@@ -154,7 +155,7 @@ require("gitsigns").setup({
 
 -- Utilities from mini
 require("mini.ai").setup({ n_lines = 500 }) -- Around/Inside textobjects
-require("mini.surround").setup() -- Surrounding Add/Delete/Replace
+require("mini.surround").setup()            -- Surrounding Add/Delete/Replace
 require("mini.icons").setup()
 local statusline = require("mini.statusline")
 statusline.setup({ use_icons = vim.g.have_nerd_font })
@@ -207,7 +208,8 @@ map("n", "<leader>/", function()
     MiniExtra.pickers.buf_lines({ scope = "current" })
 end, { desc = "[/] Search in current buffer" })
 map("n", "<leader><leader>", MiniPick.builtin.buffers, { desc = "[ ] Find existing buffers" })
-map("n", "<leader>s.", MiniExtra.pickers.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+map("n", "<leader>s.", MiniExtra.pickers.oldfiles,
+    { desc = '[S]earch Recent Files ("." for repeat)' })
 map("n", "<leader>sr", MiniPick.builtin.resume, { desc = "[R]esume [S]earch" })
 map("n", "<leader>sh", MiniPick.builtin.help, { desc = "[S]earch [H]elp" })
 map("n", "<leader>sk", MiniExtra.pickers.keymaps, { desc = "[S]earch [K]eymaps" })
@@ -254,16 +256,17 @@ require("nvim-autopairs").setup()
 require("nvim-ts-autotag").setup()
 
 -- Treesitter
--- stylua: ignore start
 local treesitters = {
-    "angular", "asm", "bash", "sh", "beancount", "bibtex", "c", "c_sharp", "cmake", "commonlisp", "cpp", "css", "csv",
-    "cuda", "dart", "diff", "disassembly", "dockerfile", "editorconfig", "git_config", "git_rebase", "gitattributes",
-    "gitcommit", "gitignore", "glsl", "go", "graphql", "hlsl", "html", "http", "java", "javascript", "jsdoc", "json",
-    "json5", "jsonc", "kotlin", "latex", "llvm", "lua", "luadoc", "luap", "make", "markdown", "markdown_inline", "matlab",
-    "objc", "odin", "php", "printf", "python", "query", "regex", "ruby", "rust", "scala", "sql", "swift", "terraform",
-    "toml", "tsx", "typescript", "typst", "vala", "vim", "vimdoc", "vue", "xml", "yaml", "zig",
+    "angular", "asm", "bash", "sh", "beancount", "bibtex", "c", "c_sharp", "cmake", "commonlisp",
+    "cpp",
+    "css", "csv", "cuda", "dart", "diff", "disassembly", "dockerfile", "editorconfig", "git_config",
+    "git_rebase", "gitattributes", "gitcommit", "gitignore", "glsl", "go", "graphql", "hlsl", "html",
+    "http", "java", "javascript", "jsdoc", "json", "json5", "jsonc", "kotlin", "latex", "llvm", "lua",
+    "luadoc", "luap", "make", "markdown", "markdown_inline", "matlab", "objc", "odin", "php",
+    "printf",
+    "python", "query", "regex", "ruby", "rust", "scala", "sql", "swift", "terraform", "toml", "tsx",
+    "typescript", "typst", "vala", "vim", "vimdoc", "vue", "xml", "yaml", "zig",
 }
--- stylua: ignore end
 require("nvim-treesitter").install(treesitters)
 vim.api.nvim_create_autocmd("FileType", {
     pattern = treesitters,
@@ -277,22 +280,22 @@ vim.api.nvim_create_autocmd("FileType", {
 require("treesitter-context").setup({
     enable = true,
     multiwindow = false,
-    max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-    min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+    max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
+    min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
     line_numbers = true,
     multiline_threshold = 20, -- Maximum number of lines to show for a single context
-    trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-    mode = "cursor", -- Line used to calculate context. Choices: 'cursor', 'topline'
+    trim_scope = "outer",     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+    mode = "cursor",          -- Line used to calculate context. Choices: 'cursor', 'topline'
     separator = nil,
-    zindex = 20, -- The Z-index of the context window
-    on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+    zindex = 20,              -- The Z-index of the context window
+    on_attach = nil,          -- (fun(buf: integer): boolean) return false to disable attaching
 })
 require("nvim-treesitter-textobjects").setup({
     select = {
         lookahead = true,
         selection_modes = {
             ["@parameter.outer"] = "v", -- charwise
-            ["@function.outer"] = "V", -- linewise
+            ["@function.outer"] = "V",  -- linewise
             ["@class.outer"] = "<c-v>", -- blockwise
         },
     },
@@ -431,7 +434,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("<leader>ws", function()
             MiniExtra.pickers.lsp({ scope = "workspace_symbol" })
         end, "[W]orkspace [S]ymbols")
-        map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame") -- grn
+        map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")                         -- grn
         map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" }) --gra
         map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
         map("<leader>cc", vim.lsp.codelens.run, "Run [C]odelens", { "n", "v" })
@@ -474,7 +477,7 @@ vim.diagnostic.config({
 })
 map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 map("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.lsp.enable({ "lua_ls", "tinymist", "ruff", "ty", "pyright", "bashls", "ts_ls", "tsgo" })
+vim.lsp.enable({ "lua_ls", "tinymist", "ruff", "ty", "pyright", "bashls", "tsgo", "vtsls" })
 
 -- Autocomplete
 local auto_blink = false
@@ -511,7 +514,6 @@ require("conform").setup({
         }
     end,
     formatters_by_ft = {
-        lua = { "stylua" },
         python = {
             -- To fix auto-fixable lint errors.
             "ruff_fix",
@@ -524,6 +526,7 @@ require("conform").setup({
         json = { "prettierd", "prettier", stop_after_first = true },
         jsonc = { "prettierd", "prettier", stop_after_first = true },
         typescript = { "prettierd", "prettier", stop_after_first = true },
+        markdown = { "markdownlint-cli2" }
     },
 })
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
@@ -570,15 +573,15 @@ dapui.setup({
 })
 -- Change breakpoint icons
 vim.api.nvim_set_hl(0, "DapBreak", { fg = "#d8647e" }) -- error
-vim.api.nvim_set_hl(0, "DapStop", { fg = "#f3be7c" }) -- warning
+vim.api.nvim_set_hl(0, "DapStop", { fg = "#f3be7c" })  -- warning
 local breakpoint_icons = vim.g.have_nerd_font
-        and {
-            Breakpoint = "",
-            BreakpointCondition = "",
-            BreakpointRejected = "",
-            LogPoint = "",
-            Stopped = "",
-        }
+    and {
+        Breakpoint = "",
+        BreakpointCondition = "",
+        BreakpointRejected = "",
+        LogPoint = "",
+        Stopped = "",
+    }
     or {
         Breakpoint = "●",
         BreakpointCondition = "⊜",
@@ -626,7 +629,7 @@ dap.adapters["pwa-node"] = {
     port = "${port}",
     executable = {
         command = "node",
-        args = { vim.fn.expand("~") .. "/bin/js-debug/src/dapDebugServer.js", "${port}" },
+        args = { vim.fn.expand("$XDG_DATA_HOME") .. "/js-debug/src/dapDebugServer.js", "${port}" },
     },
 }
 dap.configurations.javascript = {
@@ -639,23 +642,23 @@ dap.configurations.javascript = {
         console = "integratedTerminal",
     },
 }
-dap.configurations.javascript = {
-    {
-        type = "pwa-node",
-        request = "launch",
-        name = "Launch JavaScript file (Deno)",
-        runtimeExecutable = "deno",
-        runtimeArgs = {
-            "run",
-            "--inspect-wait",
-            "--allow-all",
-        },
-        program = "${file}",
-        cwd = "${workspaceFolder}",
-        attachSimplePort = 9229,
-        console = "integratedTerminal",
-    },
-}
+-- dap.configurations.javascript = {
+--     {
+--         type = "pwa-node",
+--         request = "launch",
+--         name = "Launch JavaScript file (Deno)",
+--         runtimeExecutable = "deno",
+--         runtimeArgs = {
+--             "run",
+--             "--inspect-wait",
+--             "--allow-all",
+--         },
+--         program = "${file}",
+--         cwd = "${workspaceFolder}",
+--         attachSimplePort = 9229,
+--         console = "integratedTerminal",
+--     },
+-- }
 dap.configurations.typescript = {
     {
         type = "pwa-node",
@@ -685,14 +688,9 @@ dap.configurations.typescript = {
 
 -- Doc preview
 -- Markdown
-require("peek").setup({
-    filetype = { "markdown", "conf" },
-})
+vim.g.mkdp_theme = "dark"
 -- Typst
-require("typst-preview").setup({ dependencies_bin = {
-    ["tinymist"] = "tinymist",
-    ["websocat"] = "websocat",
-} })
+require("typst-preview").setup()
 
 -- Repl
 local common = require("iron.fts.common")
