@@ -1,16 +1,27 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+FD_BIN=${FD_BIN:-fd}
+
+if ! command -v "$FD_BIN" >/dev/null 2>&1; then
+  if command -v fdfind >/dev/null 2>&1; then
+    FD_BIN=fdfind
+  else
+    echo "Error: fd/fdfind not found in PATH (PATH=$PATH)" >&2
+    exit 1
+  fi
+fi
 
 DIRS=(
   "$HOME/doc"
-  "$HOME/repo"
+  "$HOME/src/repo"
   "$HOME/src"
-  # "$HOME"
 )
 
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  selected=$(fd . "${DIRS[@]}" --type=dir --max-depth=3 \
+  selected=$($FD_BIN . "${DIRS[@]}" --type=directory --max-depth=1 \
     | sed "s|^$HOME/||" \
     | fzf --margin=5%)
   [[ $selected ]] && selected="$HOME/$selected"

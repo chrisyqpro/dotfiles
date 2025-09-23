@@ -15,6 +15,8 @@ esac
 
 fpath=("$HOME/.local/share/zsh/site-functions" $fpath)
 
+emulate sh -c 'source /etc/profile'
+
 typeset -U PATH path
 typeset app_paths=()
 
@@ -27,6 +29,3 @@ if [ -d "$HOME/.local/bin" ] ; then app_paths+="$HOME/.local/bin"; fi
 if [ -d "$HOME/bin" ] ; then app_paths+="$HOME/bin"; fi
 
 path=($app_paths $path)
-
-# Added by Toolbox App
-export PATH="$PATH:/Users/dzr/Library/Application Support/JetBrains/Toolbox/scripts"
