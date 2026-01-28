@@ -83,6 +83,7 @@ vim.pack.add({
     "https://github.com/iamcco/markdown-preview.nvim",
     { src = "https://github.com/chomosuke/typst-preview.nvim", verion = vim.version.range("1.*") },
     "https://github.com/Vigemus/iron.nvim",
+    "https://codeberg.org/mfussenegger/nvim-jdtls"
 })
 
 -- Theme
@@ -477,7 +478,7 @@ vim.diagnostic.config({
 })
 map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 map("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.lsp.enable({ "lua_ls", "tinymist", "ruff", "ty", "pyright", "bashls", "tsgo", "vtsls" })
+vim.lsp.enable({ "lua_ls", "tinymist", "ruff", "ty", "pyright", "bashls", "jdtls", "tsgo", "vtsls" })
 
 -- Autocomplete
 local auto_blink = false
