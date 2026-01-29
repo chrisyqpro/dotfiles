@@ -81,7 +81,7 @@ vim.pack.add({
     "https://github.com/mfussenegger/nvim-dap",
     "https://codeberg.org/mfussenegger/nvim-dap-python",
     "https://github.com/iamcco/markdown-preview.nvim",
-    { src = "https://github.com/chomosuke/typst-preview.nvim", verion = vim.version.range("1.*") },
+    { src = "https://github.com/chomosuke/typst-preview.nvim", version = vim.version.range("1.*") },
     "https://github.com/Vigemus/iron.nvim",
     "https://codeberg.org/mfussenegger/nvim-jdtls"
 })
@@ -258,15 +258,13 @@ require("nvim-ts-autotag").setup()
 
 -- Treesitter
 local treesitters = {
-    "angular", "asm", "bash", "sh", "beancount", "bibtex", "c", "c_sharp", "cmake", "commonlisp",
-    "cpp",
-    "css", "csv", "cuda", "dart", "diff", "disassembly", "dockerfile", "editorconfig", "git_config",
-    "git_rebase", "gitattributes", "gitcommit", "gitignore", "glsl", "go", "graphql", "hlsl", "html",
-    "http", "java", "javascript", "jsdoc", "json", "json5", "jsonc", "kotlin", "latex", "llvm", "lua",
-    "luadoc", "luap", "make", "markdown", "markdown_inline", "matlab", "objc", "odin", "php",
-    "printf",
-    "python", "query", "regex", "ruby", "rust", "scala", "sql", "swift", "terraform", "toml", "tsx",
-    "typescript", "typst", "vala", "vim", "vimdoc", "vue", "xml", "yaml", "zig",
+    "angular", "asm", "bash", "beancount", "bibtex", "c", "c_sharp", "cmake", "commonlisp",
+    "cpp", "css", "csv", "cuda", "dart", "diff", "disassembly", "dockerfile", "editorconfig",
+    "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore", "glsl", "go", "graphql",
+    "hlsl", "html", "http", "java", "javascript", "jsdoc", "json", "json5", "kotlin", "latex", "llvm",
+    "lua", "luadoc", "luap", "make", "markdown", "markdown_inline", "matlab", "objc", "odin", "php",
+    "printf", "python", "query", "regex", "ruby", "rust", "scala", "sql", "swift", "terraform",
+    "toml", "tsx", "typescript", "typst", "vala", "vim", "vimdoc", "vue", "xml", "yaml", "zig",
 }
 require("nvim-treesitter").install(treesitters)
 vim.api.nvim_create_autocmd("FileType", {
