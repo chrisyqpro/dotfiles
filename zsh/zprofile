@@ -10,12 +10,11 @@ case "$OSTYPE" in
     fi
     ;;
   *)
+    emulate sh -c 'source /etc/profile'
     ;;
 esac
 
 fpath=("$HOME/.local/share/zsh/site-functions" $fpath)
-
-emulate sh -c 'source /etc/profile'
 
 typeset -U PATH path
 typeset app_paths=()
